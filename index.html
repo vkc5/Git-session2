@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Name List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #names {
+            font-size: 1.5em;
+            color: #555;
+            white-space: pre-wrap;
+            /* Preserve line breaks in the text file */
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Participants' Names</h1>
+    <div id="names">
+        <!-- Names will be dynamically loaded here -->
+    </div>
+    <script>
+        // Function to fetch and update names
+        function fetchNames() {
+            // Fetch the names.txt file from the repository
+            fetch('' + new Date().getTime())
+                .then(response => response.text())
+                .then(data => {
+                    // Update the webpage with the new content
+                    document.getElementById('names').innerText = data;
+                })
+                .catch(error => console.error('Error fetching names:', error));
+        }
+
+        // Fetch names every 5 seconds (5000 milliseconds)
+        setInterval(fetchNames, 5000);
+
+        // Fetch names immediately when the page loads
+        fetchNames();
+    </script>
+</body>
+
+</html>
