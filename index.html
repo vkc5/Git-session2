@@ -31,25 +31,20 @@
         <!-- Names will be dynamically loaded here -->
     </div>
     <script>
-        // Function to fetch and update names using GitHub API
+        // Function to fetch and update names
         function fetchNames() {
-            // GitHub API URL to fetch the contents of names.txt in your repository
-            const apiUrl = 'https://raw.githubusercontent.com/AliOmar04/RepoTest/refs/heads/main/Names.txt';
-
-            // Fetch the file content from GitHub API
-            fetch(apiUrl)
-                .then(response => response.json())
+            // Fetch the names.txt file from the repository
+            fetch('https://raw.githubusercontent.com/batool5b/git-test/refs/heads/main/name.txt')
+                .then(response => response.text())
                 .then(data => {
-                    // Decode the base64 content
-                    const content = atob(data.content);
                     // Update the webpage with the new content
-                    document.getElementById('names').innerText = content;
+                    document.getElementById('names').innerText = data;
                 })
                 .catch(error => console.error('Error fetching names:', error));
         }
 
-        // Fetch names every 2 seconds (2000 milliseconds)
-        setInterval(fetchNames, 2000);
+        // Fetch names every 5 seconds (5000 milliseconds)
+        setInterval(fetchNames, 5000);
 
         // Fetch names immediately when the page loads
         fetchNames();
